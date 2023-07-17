@@ -40,5 +40,5 @@ async def waifu(ctx):
     else:
         await ctx.send('Failed to fetch waifu image.')
 
-bot.run('MTEzMDQ5MTY1MjM0NDEzMTYzNQ.G2OFAD.-_7Ojb4woXsj15HtqO_fPtuilBBx-P3LytVYcw')
+bot.run('')
 
