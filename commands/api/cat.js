@@ -7,9 +7,7 @@ module.exports = {
 		.setName('cat')
 		.setDescription('Get a random picture of a cat.'),
 	async execute(interaction) {
-		const res = await axios.get(cat_url);
-		console.log(res);
-		const imageUrl = res.data[0].url;
-		return await interaction.reply(imageUrl);
+		await interaction.reply((await axios.get(cat_url)).data[0].url);
 	},
-};
+}
+			

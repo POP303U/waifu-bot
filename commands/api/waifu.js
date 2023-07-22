@@ -45,10 +45,6 @@ module.exports = {
                     { name: 'slap', value: 'slap'},
                 )),
 	async execute(interaction) {
-        const arg1 = interaction.options.getString('type');
-        const arg2 = interaction.options.getString('category');
-        const response = await axios.get(waifu_url + arg1 + '/' + arg2);
-        const imageUrl = response.data.url;
-        return await interaction.reply(imageUrl);
+		await interaction.reply((await axios.get(waifu_url + interaction.options.getString('type') + '/' + interaction.options.getString('category'))).data.url)
 	},
 };
