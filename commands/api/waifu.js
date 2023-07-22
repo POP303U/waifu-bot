@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const axios = require('axios');
 const waifu_url = 'https://api.waifu.pics/';
 
 module.exports = {
@@ -44,19 +45,10 @@ module.exports = {
                     { name: 'slap', value: 'slap'},
                 )),
 	async execute(interaction) {
-        const arg1 = interaction.options.getString('type')
-        const arg2 = interaction.options.getString('category')
-		fetch(waifu_url + arg1 + '/' + arg2)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error("Network response was not ok");
-				}
-				return response.json();
-			})
-			.then(data => {
-				const imageUrl = data['url'];
-                console.log(`| Send: `+ imageUrl + ` | Type: ` + arg1 + ` | Category: ` + arg2 + ` |`)
-			    return interaction.reply(imageUrl);
-			})
+        const arg1 = interaction.options.getString('type');
+        const arg2 = interaction.options.getString('category');
+        const response = await axios.get(waifu_url + arg1 + '/' + arg2);
+        const imageUrl = response.data.url;
+        return await interaction.reply(imageUrl);
 	},
 };
